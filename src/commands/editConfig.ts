@@ -25,8 +25,8 @@ export const editConfigCommand: Command = {
 
   async execute(interaction: ChatInputCommandInteraction) {
     const target = interaction.options.getString("target", true) as keyof BotConfig;
-    // Discordの入力文字列 "A\nB" を実際の改行コードに変換
-    const text = interaction.options.getString("text", true).replace(/\\n/g, "\n"); 
+    // Discordの入力文字列 "A\nB" を実際の改行コードに変換o
+    const text = interaction.options.getString("text", true).replace(/\\n/g, "\n");
 
     try {
       const config = loadConfig();
