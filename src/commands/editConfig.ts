@@ -25,7 +25,7 @@ export const editConfigCommand: Command = {
 
   async execute(interaction: ChatInputCommandInteraction) {
     const target = interaction.options.getString("target", true) as keyof BotConfig;
-    // Discordの入力文字列 "A\nB" を実際の改行コードに変換o
+    // Discordの入力文字列 "A\nB" を実際の改行コードに変換
     const text = interaction.options.getString("text", true).replace(/\\n/g, "\n");
 
     try {
@@ -33,10 +33,17 @@ export const editConfigCommand: Command = {
       config[target].template = text;
       saveConfig(config);
 
-      await interaction.reply({ content: `設定を更新しました。\n**${target}**:\n${text}`, ephemeral: true });
+      // String(target) とすることで、Symbol型の可能性による警告(ts2731)を回避
+      await interaction.reply({ 
+        content: `設定を更新しました。\n**${String(target)}**:\n${text}`, 
+        ephemeral: true 
+      });
     } catch (error) {
       console.error(error);
-      await interaction.reply({ content: "設定の保存中にエラーが発生しました。", ephemeral: true });
+      // すでにレスポンスを返していない場合のみエラーメッセージを送信
+      if (!interaction.replied) {
+        await interaction.reply({ content: "設定の保存中にエラーが発生しました。", ephemeral: true });
+      }
     }
   }
 };

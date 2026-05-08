@@ -14,21 +14,25 @@ export function scheduleDailyReport(client: Client): void {
 
       console.log(`[遷移記録] 日次レポート送信 (本日の遷移抜け: ${count}人)`);
 
-      if (!ENV.reportChannelId) {
-        console.warn("[警告] REPORT_CHANNEL_ID が未設定です");
-        resetJoinCount();
-        return;
-      }
+      try {
+        if (!ENV.reportChannelId) {
+          console.warn("[警告] REPORT_CHANNEL_ID が未設定です");
+          return;
+        }
 
-      const channel = client.channels.cache.get(ENV.reportChannelId);
-      if (!channel?.isTextBased()) {
-        console.warn("[警告] レポートチャンネルが見つかりません");
-        resetJoinCount();
-        return;
-      }
+        const channel = client.channels.cache.get(ENV.reportChannelId);
+        if (!channel?.isTextBased()) {
+          console.warn("[警告] レポートチャンネルが見つかりません");
+          return;
+        }
 
-      await (channel as TextChannel).send(message);
-      resetJoinCount();
+        await (channel as TextChannel).send(message);
+      } catch (err) {
+        console.error("[エラー] 日次レポート送信失敗:", err);
+      } finally {
+        // 送信の成功・失敗に関わらずカウントをリセット
+        resetJoinCount();
+      }
     },
     { timezone: "Asia/Tokyo" }
   );
