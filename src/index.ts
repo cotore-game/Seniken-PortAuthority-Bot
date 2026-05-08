@@ -1,11 +1,9 @@
 import "dotenv/config";
-import { Client, Events, GatewayIntentBits, GuildMember } from "discord.js";
+import { Client, Events, GatewayIntentBits, GuildMember, Interaction } from "discord.js";
 import { ENV } from "./config";
 import { readyEvent } from "./events/ready";
 import { guildMemberAddEvent } from "./events/guildMemberAdd";
 import { scheduleDailyReport } from "./tasks/dailyReport";
-
-import { Interaction } from "discord.js";
 import { editConfigCommand } from "./commands/editConfig";
 
 if (!ENV.token) {
