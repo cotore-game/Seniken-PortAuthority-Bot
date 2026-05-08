@@ -31,6 +31,7 @@ export function buildReportMessage(count: number): string {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
+    timeZone: "Asia/Tokyo"
   });
   return config.dailyReport.template
     .replace("{date}", date)
