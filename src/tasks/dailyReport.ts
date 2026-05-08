@@ -4,7 +4,7 @@ import { ENV, buildReportMessage } from "../config";
 import { getTodayJoinCount, resetJoinCount } from "../events/guildMemberAdd";
 
 export function scheduleDailyReport(client: Client): void {
-  console.log(`[遷移圏Bot] 日次レポートスケジュール設定: ${ENV.reportCron}`);
+  console.log(`[遷移通行管理局Bot] 日次レポートスケジュール設定: ${ENV.reportCron}`);
 
   cron.schedule(
     ENV.reportCron,

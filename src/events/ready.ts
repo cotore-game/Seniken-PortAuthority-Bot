@@ -5,7 +5,6 @@ export const readyEvent = {
   once: true,
 
   execute(client: Client): void {
-    console.log(`[遷移圏Bot] ${client.user?.tag} として起動完了`);
-    console.log(`[遷移圏Bot] 遷移通信状況：良好 ▮▮▮▮▮`);
+    console.log(`[遷移通行管理局Bot] ${client.user?.tag} 起動完了`);
   },
 };
