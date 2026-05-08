@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, SlashCommandBuilder, SlashCommandOptionsOn
 
 export interface Command {
   // スラッシュコマンドの定義データ
-  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder | any;
+  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
   // 実行される処理
   execute(interaction: ChatInputCommandInteraction): Promise<void>;
 }

@@ -37,11 +37,6 @@ export function buildReportMessage(count: number): string {
     .replace("{count}", String(count));
 }
 
-export interface BotConfig { // export を追加
-  welcomeMessage: { template: string; comment: string };
-  dailyReport: { template: string; comment: string };
-}
-
 export function saveConfig(newConfig: BotConfig): void {
   // null, 2 でインデント付きの綺麗なJSONとして保存
   fs.writeFileSync(CONFIG_PATH, JSON.stringify(newConfig, null, 2), "utf-8");
